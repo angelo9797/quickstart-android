@@ -16,20 +16,26 @@ package com.google.firebase.samples.apps.mlkit.java.custommodel;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import androidx.annotation.NonNull;
+
+import android.graphics.Canvas;
+import android.graphics.Rect;
 import android.util.Log;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.ml.common.FirebaseMLException;
+import com.google.firebase.ml.vision.objects.FirebaseVisionObject;
 import com.google.firebase.samples.apps.mlkit.common.BitmapUtils;
 import com.google.firebase.samples.apps.mlkit.common.CameraImageGraphic;
 import com.google.firebase.samples.apps.mlkit.common.FrameMetadata;
 import com.google.firebase.samples.apps.mlkit.common.GraphicOverlay;
 import com.google.firebase.samples.apps.mlkit.common.VisionImageProcessor;
+import com.google.firebase.samples.apps.mlkit.java.customobjectdetection.CustomObjectGraphic;
 
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -86,8 +92,8 @@ public class CustomImageClassifierProcessor implements VisionImageProcessor {
     }
 
     @Override
-    public void process(Bitmap bitmap, GraphicOverlay graphicOverlay) {
-        // nop
+    public void process(final Bitmap bitmap, final GraphicOverlay graphicOverlay){
+        //..
     }
 
     @Override

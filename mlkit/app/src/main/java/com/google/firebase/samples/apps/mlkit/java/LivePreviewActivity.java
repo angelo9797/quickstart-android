@@ -47,6 +47,7 @@ import com.google.firebase.samples.apps.mlkit.java.automl.AutoMLImageLabelerProc
 import com.google.firebase.samples.apps.mlkit.java.automl.AutoMLImageLabelerProcessor.Mode;
 import com.google.firebase.samples.apps.mlkit.java.barcodescanning.BarcodeScanningProcessor;
 import com.google.firebase.samples.apps.mlkit.java.custommodel.CustomImageClassifierProcessor;
+import com.google.firebase.samples.apps.mlkit.java.customobjectdetection.CustomObjectDetectorProcessor;
 import com.google.firebase.samples.apps.mlkit.java.facedetection.FaceContourDetectorProcessor;
 import com.google.firebase.samples.apps.mlkit.java.facedetection.FaceDetectionProcessor;
 import com.google.firebase.samples.apps.mlkit.java.imagelabeling.ImageLabelingProcessor;
@@ -69,6 +70,7 @@ public final class LivePreviewActivity extends AppCompatActivity
         OnItemSelectedListener,
         CompoundButton.OnCheckedChangeListener {
     private static final String FACE_DETECTION = "Face Detection";
+    private static final String CUSTOM_OBJECT_DETECTION = "Custom Object Detection";
     private static final String OBJECT_DETECTION = "Object Detection";
     private static final String AUTOML_IMAGE_LABELING = "AutoML Vision Edge";
     private static final String TEXT_DETECTION = "Text Detection";
@@ -106,6 +108,7 @@ public final class LivePreviewActivity extends AppCompatActivity
         options.add(FACE_DETECTION);
         options.add(AUTOML_IMAGE_LABELING);
         options.add(OBJECT_DETECTION);
+        options.add(CUSTOM_OBJECT_DETECTION);
         options.add(TEXT_DETECTION);
         options.add(BARCODE_DETECTION);
         options.add(IMAGE_LABEL_DETECTION);
@@ -222,6 +225,15 @@ public final class LivePreviewActivity extends AppCompatActivity
                                     .enableClassification().build();
                     cameraSource.setMachineLearningFrameProcessor(
                             new ObjectDetectorProcessor(objectDetectorOptions));
+                    break;
+                case CUSTOM_OBJECT_DETECTION:
+                    Log.i(TAG, "Using Custom Object Detector Processor");
+                    FirebaseVisionObjectDetectorOptions objectDetectorOptions2 =
+                            new FirebaseVisionObjectDetectorOptions.Builder()
+                                    .setDetectorMode(FirebaseVisionObjectDetectorOptions.STREAM_MODE)
+                                    .enableClassification().build();
+                    cameraSource.setMachineLearningFrameProcessor(
+                            new CustomObjectDetectorProcessor(objectDetectorOptions2,this, false));
                     break;
                 case BARCODE_DETECTION:
                     Log.i(TAG, "Using Barcode Detector Processor");

@@ -68,12 +68,12 @@ public class CustomImageClassifier {
     /**
      * Name of the floating point model uploaded to the Firebase console.
      */
-    private static final String REMOTE_FLOAT_MODEL_NAME = "mobilenet_float_v2_1.0_299";
+    private static final String REMOTE_FLOAT_MODEL_NAME = "mobilenet_float_v2_1_0_299";
 
     /**
      * Name of the quantized model uploaded to the Firebase console.
      */
-    private static final String REMOTE_QUANT_MODEL_NAME = "mobilenet_quant_v2_1.0_299";
+    private static final String REMOTE_QUANT_MODEL_NAME = "mobilenet_quant_v2_1_0_299";
 
     /**
      * Name of the label file stored in Assets.
@@ -131,7 +131,7 @@ public class CustomImageClassifier {
     /**
      * Initializes an {@code CustomImageClassifier}.
      */
-    CustomImageClassifier(final Context context, boolean useQuantizedModel) throws FirebaseMLException {
+    public CustomImageClassifier(final Context context, boolean useQuantizedModel) throws FirebaseMLException {
         mUseQuantizedModel = useQuantizedModel;
         final String remoteModelName = mUseQuantizedModel ? REMOTE_QUANT_MODEL_NAME :
                 REMOTE_FLOAT_MODEL_NAME;
@@ -204,7 +204,7 @@ public class CustomImageClassifier {
     /**
      * Classifies a frame from the preview stream.
      */
-    Task<List<String>> classifyFrame(ByteBuffer buffer, int width, int height)
+    public Task<List<String>> classifyFrame(ByteBuffer buffer, int width, int height)
             throws FirebaseMLException {
         if (interpreter == null) {
             Log.e(TAG, "Image classifier has not been initialized; Skipped.");

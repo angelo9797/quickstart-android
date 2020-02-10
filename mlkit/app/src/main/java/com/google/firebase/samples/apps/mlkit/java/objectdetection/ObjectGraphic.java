@@ -20,7 +20,7 @@ public class ObjectGraphic extends Graphic {
   private final Paint boxPaint;
   private final Paint textPaint;
 
-  ObjectGraphic(GraphicOverlay overlay, FirebaseVisionObject object) {
+  public ObjectGraphic(GraphicOverlay overlay, FirebaseVisionObject object) {
     super(overlay);
 
     this.object = object;
@@ -48,9 +48,11 @@ public class ObjectGraphic extends Graphic {
     // Draws other object info.
     canvas.drawText(
         getCategoryName(object.getClassificationCategory()), rect.left, rect.bottom, textPaint);
-    canvas.drawText("trackingId: " + object.getTrackingId(), rect.left, rect.top, textPaint);
+    /*canvas.drawText("trackingId: " + object.getTrackingId(), rect.left, rect.top, textPaint);
     canvas.drawText(
         "confidence: " + object.getClassificationConfidence(), rect.right, rect.bottom, textPaint);
+
+     */
   }
 
   private static String getCategoryName(@FirebaseVisionObject.Category int category) {

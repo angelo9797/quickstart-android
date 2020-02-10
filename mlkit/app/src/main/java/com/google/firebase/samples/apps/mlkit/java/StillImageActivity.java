@@ -40,6 +40,7 @@ import android.widget.PopupMenu.OnMenuItemClickListener;
 import android.widget.Spinner;
 
 import com.google.android.gms.common.annotation.KeepName;
+import com.google.firebase.ml.common.FirebaseMLException;
 import com.google.firebase.samples.apps.mlkit.R;
 import com.google.firebase.samples.apps.mlkit.common.GraphicOverlay;
 import com.google.firebase.samples.apps.mlkit.common.VisionImageProcessor;
@@ -331,6 +332,8 @@ public final class StillImageActivity extends AppCompatActivity {
       imageProcessor.process(resizedBitmap, graphicOverlay);
     } catch (IOException e) {
       Log.e(TAG, "Error retrieving saved image");
+    } catch (FirebaseMLException e) {
+      e.printStackTrace();
     }
   }
 

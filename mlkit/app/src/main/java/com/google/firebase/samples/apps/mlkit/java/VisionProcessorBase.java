@@ -22,6 +22,7 @@ import androidx.annotation.Nullable;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.ml.common.FirebaseMLException;
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
 import com.google.firebase.ml.vision.common.FirebaseVisionImageMetadata;
 import com.google.firebase.samples.apps.mlkit.common.BitmapUtils;
@@ -115,9 +116,13 @@ public abstract class VisionProcessorBase<T> implements VisionImageProcessor {
                         new OnSuccessListener<T>() {
                             @Override
                             public void onSuccess(T results) {
-                                VisionProcessorBase.this.onSuccess(originalCameraImage, results,
-                                        metadata,
-                                        graphicOverlay);
+                                try {
+                                    VisionProcessorBase.this.onSuccess(originalCameraImage, results,
+                                            metadata,
+                                            graphicOverlay);
+                                } catch (FirebaseMLException e) {
+                                    e.printStackTrace();
+                                }
                                 processLatestImage(graphicOverlay);
                             }
                         })
@@ -146,7 +151,7 @@ public abstract class VisionProcessorBase<T> implements VisionImageProcessor {
             @Nullable Bitmap originalCameraImage,
             @NonNull T results,
             @NonNull FrameMetadata frameMetadata,
-            @NonNull GraphicOverlay graphicOverlay);
+            @NonNull GraphicOverlay graphicOverlay) throws FirebaseMLException;
 
     protected abstract void onFailure(@NonNull Exception e);
 }
