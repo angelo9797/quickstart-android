@@ -233,7 +233,7 @@ public final class LivePreviewActivity extends AppCompatActivity
                                     .setDetectorMode(FirebaseVisionObjectDetectorOptions.STREAM_MODE)
                                     .enableClassification().build();
                     cameraSource.setMachineLearningFrameProcessor(
-                            new CustomObjectDetectorProcessor(objectDetectorOptions2,this, false));
+                            new CustomObjectDetectorProcessor(objectDetectorOptions2,this, true));
                     break;
                 case BARCODE_DETECTION:
                     Log.i(TAG, "Using Barcode Detector Processor");
